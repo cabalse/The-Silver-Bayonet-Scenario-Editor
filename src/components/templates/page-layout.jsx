@@ -3,7 +3,7 @@ import ContentLayout from "./content-layout";
 
 const PageLayout = ({ title, children }) => {
   return (
-    <div className="full-w m-5">
+    <div className="h-full w-full p-5">
       <PageHeader title={title} />
       <ContentLayout>{children}</ContentLayout>
     </div>

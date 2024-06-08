@@ -1,7 +1,7 @@
 const initialAppState = {
-  app: {
-    title: "The Silver Bayonet - Scenario Editor",
-  },
+  title: "The Silver Bayonet - Scenario Editor",
+  displayLoadDialog: false,
+  disabledMenuItems: ["Save"],
 };
 
 export default initialAppState;
