@@ -1,0 +1,24 @@
+{
+	"name": "Test Scenario #1",
+	"desc": "A test Scenario for The Silver Bayonet miniature game",
+	"terrain": [
+		{"id": 1,
+        "image": "https://via.placeholder.com/50",
+        "position": { "x": 10, "y": 10 },
+        "rotation": 0,
+        "width": 50,
+        "height": 50},
+		{"id": 2,
+        "image": "https://via.placeholder.com/100",
+        "position": { "x": 100, "y": 100 },
+        "rotation": 0,
+        "width": 100,
+        "height": 100},
+		{"id": 3,
+        "image": "https://via.placeholder.com/75",
+        "position": { "x": 200, "y": 100 },
+        "rotation": 0,
+        "width": 75,
+        "height": 75}
+	]
+}
