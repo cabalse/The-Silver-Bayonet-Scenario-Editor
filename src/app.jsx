@@ -1,12 +1,30 @@
-import IndexPage from "./components/pages/index-page";
+import IndexPage from "./components/04-pages/index-page";
+import LoadDialog from "./components/01-molecules/load-dialog";
+import useAppContext from "./context/appcontext/useappcontext";
+import { AppReducerActionTypes } from "./context/appcontext/appstatereducers";
+import PAGES from "./constants/pages";
+import JsonViewerPage from "./components/04-pages/json-viewer-page";
+import MapEditPage from "./components/04-pages/map-edit-page";
 
 import "./app.css";
-import LoadDialog from "./components/molecules/load-dialog";
-import useAppContext from "./context/useappcontext";
-import { AppReducerActionTypes } from "./context/reducers/appstatereducers";
 
 function App() {
   const context = useAppContext();
+  let page = null;
+
+  switch (context.appState.page) {
+    case PAGES.INDEX:
+      page = <IndexPage />;
+      break;
+    case PAGES.JSON_VIEWER:
+      page = <JsonViewerPage />;
+      break;
+    case PAGES.EDIT:
+      page = <MapEditPage />;
+      break;
+    default:
+      console.log("Unknown page", context.appState.page);
+  }
 
   return (
     <>
@@ -29,7 +47,7 @@ function App() {
           })
         }
       />
-      <IndexPage />
+      {page}
     </>
   );
 }

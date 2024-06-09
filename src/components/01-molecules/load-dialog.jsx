@@ -1,7 +1,49 @@
+import { useState } from "react";
 import BUTTON_TYPES from "../../constants/button-types";
-import Button from "../atoms/button";
+import Button from "../00-atoms/button";
+import useAppContext from "../../context/appcontext/useappcontext";
+import { AppReducerActionTypes } from "../../context/appcontext/appstatereducers";
+import PAGES from "../../constants/pages";
+import MENU_ITEMS from "../../constants/menu-items";
 
-const LoadDialog = ({ onSelectLoad, displayDialog, closeDialog }) => {
+const LoadDialog = ({ displayDialog, closeDialog }) => {
+  const context = useAppContext();
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (file) {
+      let reader = new FileReader();
+      reader.onload = function () {
+        if (reader.result) {
+          const data = JSON.parse(reader.result.toString());
+          context.appStateDispatch({
+            type: AppReducerActionTypes.SET_SCENARIO_DATA,
+            payload: data,
+          });
+          context.appStateDispatch({
+            type: AppReducerActionTypes.SWITCH_PAGE,
+            payload: PAGES.JSON_VIEWER,
+          });
+          context.appStateDispatch({
+            type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
+            payload: MENU_ITEMS.EDIT,
+          });
+        }
+      };
+      reader.onerror = function () {
+        console.error(reader.error);
+      };
+      reader.readAsText(file);
+    }
+    closeDialog();
+  };
+
   if (displayDialog) {
     return (
       <div
@@ -29,16 +71,22 @@ const LoadDialog = ({ onSelectLoad, displayDialog, closeDialog }) => {
                       <p className="text-sm text-gray-500">
                         Select a scenario file to load.
                       </p>
+                      <input
+                        type="file"
+                        className="mt-4"
+                        onChange={handleFileChange}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
+
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <Button type={BUTTON_TYPES.NEGATIVE} onClick={closeDialog}>
                   Cancel
                 </Button>
-                <Button type={BUTTON_TYPES.PRIMARY} onClick={onSelectLoad}>
-                  Load
+                <Button type={BUTTON_TYPES.PRIMARY} onClick={handleUpload}>
+                  Upload
                 </Button>
               </div>
             </div>

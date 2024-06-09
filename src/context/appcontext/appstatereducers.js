@@ -5,6 +5,8 @@ const AppReducerActionTypes = Object.freeze({
   CHANGE_LOAD_DIALOG_STATE: "CHANGE_LOAD_DIALOG_STATE",
   ADD_DISABLED_MENU_ITEM: "ADD_DISABLED_MENU_ITEM",
   REMOVE_DISABLED_MENU_ITEM: "REMOVE_DISABLED_MENU_ITEM",
+  SET_SCENARIO_DATA: "SET_SCENARIO_DATA",
+  SWITCH_PAGE: "SWITCH_PAGE",
 });
 
 const appStateReducer = (state, action) => {
@@ -28,6 +30,16 @@ const appStateReducer = (state, action) => {
       return {
         ...state,
         disabledMenuItems: disabledMenuItems,
+      };
+    case AppReducerActionTypes.SET_SCENARIO_DATA:
+      return {
+        ...state,
+        scenarioData: payload,
+      };
+    case AppReducerActionTypes.SWITCH_PAGE:
+      return {
+        ...state,
+        page: payload,
       };
     default:
       return state;

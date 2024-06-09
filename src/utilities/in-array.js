@@ -1,5 +1,6 @@
 const inArray = (array, value) => {
-  return array.indexOf(value) !== -1;
+  const res = array.indexOf(value) !== -1;
+  return res;
 };
 
 export default inArray;
