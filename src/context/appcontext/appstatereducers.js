@@ -3,6 +3,7 @@ import removeFromArray from "../../utilities/remove-from-array";
 
 const AppReducerActionTypes = Object.freeze({
   CHANGE_LOAD_DIALOG_STATE: "CHANGE_LOAD_DIALOG_STATE",
+  CHANGE_ADD_ITEM_DIALOG_STATE: "CHANGE_ADD_ITEM_DIALOG_STATE",
   ADD_DISABLED_MENU_ITEM: "ADD_DISABLED_MENU_ITEM",
   REMOVE_DISABLED_MENU_ITEM: "REMOVE_DISABLED_MENU_ITEM",
   SET_SCENARIO_DATA: "SET_SCENARIO_DATA",
@@ -19,14 +20,23 @@ const appStateReducer = (state, action) => {
         ...state,
         displayLoadDialog: payload,
       };
+    case AppReducerActionTypes.CHANGE_ADD_ITEM_DIALOG_STATE:
+      return {
+        ...state,
+        displayAddItemDialog: payload,
+      };
     case AppReducerActionTypes.ADD_DISABLED_MENU_ITEM:
-      addToArray(disabledMenuItems, payload);
+      if (Array.isArray(payload))
+        payload.forEach((item) => addToArray(disabledMenuItems, item));
+      else addToArray(disabledMenuItems, payload);
       return {
         ...state,
         disabledMenuItems: disabledMenuItems,
       };
     case AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM:
-      removeFromArray(disabledMenuItems, payload);
+      if (Array.isArray(payload))
+        payload.forEach((item) => removeFromArray(disabledMenuItems, item));
+      else removeFromArray(disabledMenuItems, payload);
       return {
         ...state,
         disabledMenuItems: disabledMenuItems,

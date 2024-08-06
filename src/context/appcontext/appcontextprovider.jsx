@@ -8,7 +8,7 @@ const initialContextValue = {
   appStateDispatch: () => {},
 };
 
-export const ApplicationContext = createContext(initialContextValue);
+const ApplicationContext = createContext(initialContextValue);
 
 const AppContextprovider = ({ children }) => {
   const [state, appStateDispatch] = useReducer(
@@ -29,3 +29,4 @@ const AppContextprovider = ({ children }) => {
 };
 
 export default AppContextprovider;
+export { ApplicationContext };

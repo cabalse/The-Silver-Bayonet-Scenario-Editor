@@ -13,7 +13,7 @@ const MapEditPage = () => {
       menuHandler={handlerContext.menuHandler}
       disabledMenuItems={context.appState.disabledMenuItems}
     >
-      <MapEditor data={context.appState.scenarioData.terrain} />
+      <MapEditor />
     </PageLayout>
   );
 };

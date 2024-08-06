@@ -3,6 +3,8 @@ const MENU_ITEMS = Object.freeze({
   LOAD: "Load",
   SAVE: "Save",
   EDIT: "Edit",
+  ADD: "Add",
+  REMOVE: "Remove",
 });
 
 export default MENU_ITEMS;

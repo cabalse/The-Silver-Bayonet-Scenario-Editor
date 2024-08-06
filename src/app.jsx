@@ -5,6 +5,7 @@ import { AppReducerActionTypes } from "./context/appcontext/appstatereducers";
 import PAGES from "./constants/pages";
 import JsonViewerPage from "./components/04-pages/json-viewer-page";
 import MapEditPage from "./components/04-pages/map-edit-page";
+import AddItemDialog from "./components/01-molecules/add-item-dialog";
 
 import "./app.css";
 
@@ -43,6 +44,15 @@ function App() {
         closeDialog={() =>
           context.appStateDispatch({
             type: AppReducerActionTypes.CHANGE_LOAD_DIALOG_STATE,
+            payload: false,
+          })
+        }
+      />
+      <AddItemDialog
+        displayDialog={context.appState.displayAddItemDialog}
+        closeDialog={() =>
+          context.appStateDispatch({
+            type: AppReducerActionTypes.CHANGE_ADD_ITEM_DIALOG_STATE,
             payload: false,
           })
         }

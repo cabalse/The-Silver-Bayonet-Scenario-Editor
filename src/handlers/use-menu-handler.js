@@ -24,6 +24,17 @@ const useMenuHandler = () => {
           type: AppReducerActionTypes.SWITCH_PAGE,
           payload: PAGES.EDIT,
         });
+        context.appStateDispatch({
+          type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
+          payload: MENU_ITEMS.ADD,
+        });
+        break;
+
+      case MENU_ITEMS.ADD:
+        context.appStateDispatch({
+          type: AppReducerActionTypes.CHANGE_ADD_ITEM_DIALOG_STATE,
+          payload: true,
+        });
         break;
 
       default:

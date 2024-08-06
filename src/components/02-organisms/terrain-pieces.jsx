@@ -1,14 +1,17 @@
 import { createElement } from "react";
 import TerrainPiece from "../00-atoms/terrain-piece";
 
-const TerrainPieces = ({ data }) => {
+const TerrainPieces = ({ data, selected, onMove, onSelect }) => {
   const createTerrainPiecesElement = (
     id,
     image,
     position,
     rotation,
     width,
-    height
+    height,
+    selected,
+    onMove,
+    onSelect
   ) => {
     return createElement(TerrainPiece, {
       id: id,
@@ -17,6 +20,9 @@ const TerrainPieces = ({ data }) => {
       rotation: rotation,
       width: width,
       height: height,
+      selected: selected,
+      onMove: onMove,
+      onSelect: onSelect,
     });
   };
 
@@ -30,7 +36,10 @@ const TerrainPieces = ({ data }) => {
         item.position,
         item.rotation,
         item.width,
-        item.height
+        item.height,
+        selected,
+        onMove,
+        onSelect
       )
     );
   });
