@@ -15,6 +15,13 @@ const useMenuHandler = () => {
         });
         break;
 
+      case MENU_ITEMS.DATA:
+        context.appStateDispatch({
+          type: AppReducerActionTypes.SWITCH_PAGE,
+          payload: PAGES.DATA,
+        });
+        break;
+
       case MENU_ITEMS.SAVE:
         console.log("Save menu item selected");
         break;

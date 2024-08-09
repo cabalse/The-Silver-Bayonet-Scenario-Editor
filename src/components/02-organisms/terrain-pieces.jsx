@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import TerrainPiece from "../00-atoms/terrain-piece";
 
-const TerrainPieces = ({ data, selected, onMove, onSelect }) => {
+const TerrainPieces = ({ data, selected, onMove, onSelect, onChange }) => {
   const createTerrainPiecesElement = (
     id,
     image,
@@ -23,6 +23,7 @@ const TerrainPieces = ({ data, selected, onMove, onSelect }) => {
       selected: selected,
       onMove: onMove,
       onSelect: onSelect,
+      onChange: onChange,
     });
   };
 
@@ -39,7 +40,8 @@ const TerrainPieces = ({ data, selected, onMove, onSelect }) => {
         item.height,
         selected,
         onMove,
-        onSelect
+        onSelect,
+        onChange
       )
     );
   });

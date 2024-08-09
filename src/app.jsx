@@ -18,6 +18,7 @@ function App() {
       page = <IndexPage />;
       break;
     case PAGES.JSON_VIEWER:
+    case PAGES.DATA:
       page = <JsonViewerPage />;
       break;
     case PAGES.EDIT:

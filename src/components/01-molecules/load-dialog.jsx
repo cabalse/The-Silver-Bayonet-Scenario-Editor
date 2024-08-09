@@ -33,7 +33,7 @@ const LoadDialog = ({ displayDialog, closeDialog }) => {
           });
           context.appStateDispatch({
             type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
-            payload: MENU_ITEMS.EDIT,
+            payload: [MENU_ITEMS.EDIT, MENU_ITEMS.DATA],
           });
         }
       };
