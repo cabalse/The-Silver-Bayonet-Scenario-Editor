@@ -6,6 +6,7 @@ const AppReducerActionTypes = Object.freeze({
   CHANGE_ADD_ITEM_DIALOG_STATE: "CHANGE_ADD_ITEM_DIALOG_STATE",
   ADD_DISABLED_MENU_ITEM: "ADD_DISABLED_MENU_ITEM",
   REMOVE_DISABLED_MENU_ITEM: "REMOVE_DISABLED_MENU_ITEM",
+  SET_ACTIVE_MENU_ITEM: "SET_ACTIVE_MENU_ITEM",
   SET_SCENARIO_DATA: "SET_SCENARIO_DATA",
   UPDATE_SCENARIO_TERRAIN_PIECE: "UPDATE_SCENARIO_TERRAIN_PIECE",
   SWITCH_PAGE: "SWITCH_PAGE",
@@ -28,6 +29,8 @@ const appStateReducer = (state, action) => {
         ...state,
         displayAddItemDialog: payload,
       };
+    case AppReducerActionTypes.SET_ACTIVE_MENU_ITEM:
+      return { ...state };
     case AppReducerActionTypes.ADD_DISABLED_MENU_ITEM:
       if (Array.isArray(payload))
         payload.forEach((item) => addToArray(disabledMenuItems, item));

@@ -1,8 +1,8 @@
 const MENU_ITEMS = Object.freeze({
   NONE: "",
   LOAD: "Load",
-  DATA: "Data",
   SAVE: "Save",
+  DATA: "Data",
   EDIT: "Edit",
   ADD: "Add",
   REMOVE: "Remove",
