@@ -11,7 +11,7 @@ const MapEditPage = () => {
     <PageLayout
       title={context.appState.title}
       menuHandler={handlerContext.menuHandler}
-      disabledMenuItems={context.appState.disabledMenuItems}
+      activeMenuItems={context.appState.activeMenuItems}
     >
       <MapEditor />
     </PageLayout>

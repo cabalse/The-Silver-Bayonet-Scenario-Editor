@@ -7,7 +7,6 @@ const initialAppState = {
   displayLoadDialog: false,
   displayAddItemDialog: false,
   activeMenuItems: ACTIVE_MENUS[SETTINGS.STARTUP_ACTIVE_MENUS],
-  disabledMenuItems: SETTINGS.MENU_ITEMS_INIT_DISABLED,
   scenarioData: {},
 };
 

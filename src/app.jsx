@@ -25,22 +25,12 @@ function App() {
       page = <MapEditPage />;
       break;
     default:
-      console.log("Unknown page", context.appState.page);
+      console.log("Unknown page: ", context.appState.page);
   }
 
   return (
     <>
       <LoadDialog
-        onSelectLoad={() => {
-          context.appStateDispatch({
-            type: AppReducerActionTypes.CHANGE_LOAD_DIALOG_STATE,
-            payload: false,
-          });
-          context.appStateDispatch({
-            type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
-            payload: "Save",
-          });
-        }}
         displayDialog={context.appState.displayLoadDialog}
         closeDialog={() =>
           context.appStateDispatch({

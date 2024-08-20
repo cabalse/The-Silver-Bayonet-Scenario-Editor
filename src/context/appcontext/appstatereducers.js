@@ -4,8 +4,8 @@ import removeFromArray from "../../utilities/remove-from-array";
 const AppReducerActionTypes = Object.freeze({
   CHANGE_LOAD_DIALOG_STATE: "CHANGE_LOAD_DIALOG_STATE",
   CHANGE_ADD_ITEM_DIALOG_STATE: "CHANGE_ADD_ITEM_DIALOG_STATE",
-  ADD_DISABLED_MENU_ITEM: "ADD_DISABLED_MENU_ITEM",
-  REMOVE_DISABLED_MENU_ITEM: "REMOVE_DISABLED_MENU_ITEM",
+  REMOVE_ACTIVE_MENU_ITEM: "REMOVE_ACTIVE_MENU_ITEM",
+  ADD_ACTIVE_MENU_ITEM: "ADD_ACTIVE_MENU_ITEM",
   SET_ACTIVE_MENU_ITEM: "SET_ACTIVE_MENU_ITEM",
   SET_SCENARIO_DATA: "SET_SCENARIO_DATA",
   UPDATE_SCENARIO_TERRAIN_PIECE: "UPDATE_SCENARIO_TERRAIN_PIECE",
@@ -14,7 +14,7 @@ const AppReducerActionTypes = Object.freeze({
 
 const appStateReducer = (state, action) => {
   const { type, payload } = action;
-  const disabledMenuItems = [...state.disabledMenuItems];
+  const activeMenuItems = [...state.activeMenuItems];
 
   let terrain, terrain_id;
 
@@ -31,21 +31,22 @@ const appStateReducer = (state, action) => {
       };
     case AppReducerActionTypes.SET_ACTIVE_MENU_ITEM:
       return { ...state };
-    case AppReducerActionTypes.ADD_DISABLED_MENU_ITEM:
+    case AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM:
+      console.log("Reducer ADD_ACTIVE_MENU_ITEM", payload);
       if (Array.isArray(payload))
-        payload.forEach((item) => addToArray(disabledMenuItems, item));
-      else addToArray(disabledMenuItems, payload);
+        payload.forEach((item) => addToArray(activeMenuItems, item));
+      else addToArray(activeMenuItems, payload);
       return {
         ...state,
-        disabledMenuItems: disabledMenuItems,
+        activeMenuItems: activeMenuItems,
       };
-    case AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM:
+    case AppReducerActionTypes.REMOVE_ACTIVE_MENU_ITEM:
       if (Array.isArray(payload))
-        payload.forEach((item) => removeFromArray(disabledMenuItems, item));
-      else removeFromArray(disabledMenuItems, payload);
+        payload.forEach((item) => removeFromArray(activeMenuItems, item));
+      else removeFromArray(activeMenuItems, payload);
       return {
         ...state,
-        disabledMenuItems: disabledMenuItems,
+        activeMenuItems: activeMenuItems,
       };
     case AppReducerActionTypes.SET_SCENARIO_DATA:
       return {
@@ -73,6 +74,7 @@ const appStateReducer = (state, action) => {
         page: payload,
       };
     default:
+      console.log("Unknown action type: ", type);
       return state;
   }
 };

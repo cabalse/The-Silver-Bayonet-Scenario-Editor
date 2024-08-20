@@ -11,7 +11,7 @@ const JsonViewerPage = () => {
     <PageLayout
       title={context.appState.title}
       menuHandler={handlerContext.menuHandler}
-      disabledMenuItems={context.appState.disabledMenuItems}
+      activeMenuItems={context.appState.activeMenuItems}
     >
       <JsonViewer value={context.appState.scenarioData} />
     </PageLayout>

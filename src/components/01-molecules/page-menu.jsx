@@ -3,7 +3,8 @@ import inArray from "../../utilities/in-array";
 import MenuItem from "../00-atoms/menu-item";
 
 const PageMenu = ({ onSelectedMenuItem, activeMenuItems = [] }) => {
-  console.log(activeMenuItems);
+  console.log("Active menu items: ", activeMenuItems);
+
   return (
     <div className="w-full mt-2">
       {Object.entries(SETTINGS.MENU_ITEMS).map(([, v], i) => (

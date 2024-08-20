@@ -32,7 +32,7 @@ const useMenuHandler = () => {
           payload: PAGES.EDIT,
         });
         context.appStateDispatch({
-          type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
+          type: AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM,
           payload: MENU_ITEMS.ADD,
         });
         break;

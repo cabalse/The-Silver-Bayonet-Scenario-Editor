@@ -31,7 +31,7 @@ describe("appStateReducer", () => {
     const initialState = { ...baseAppState, disabledMenuItems: [] };
 
     const action = {
-      type: AppReducerActionTypes.ADD_DISABLED_MENU_ITEM,
+      type: AppReducerActionTypes.REMOVE_ACTIVE_MENU_ITEM,
       payload: "item1",
     };
     const newState = appStateReducer(initialState, action);
@@ -43,7 +43,7 @@ describe("appStateReducer", () => {
     const initialState = { ...baseAppState, disabledMenuItems: [] };
 
     const action = {
-      type: AppReducerActionTypes.ADD_DISABLED_MENU_ITEM,
+      type: AppReducerActionTypes.REMOVE_ACTIVE_MENU_ITEM,
       payload: ["item1", "item2"],
     };
     const newState = appStateReducer(initialState, action);
@@ -61,7 +61,7 @@ describe("appStateReducer", () => {
     };
 
     const action = {
-      type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
+      type: AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM,
       payload: "item1",
     };
     const newState = appStateReducer(initialState, action);
@@ -76,7 +76,7 @@ describe("appStateReducer", () => {
     };
 
     const action = {
-      type: AppReducerActionTypes.REMOVE_DISABLED_MENU_ITEM,
+      type: AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM,
       payload: ["item1", "item3"],
     };
     const newState = appStateReducer(initialState, action);
