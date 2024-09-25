@@ -4,8 +4,8 @@ import Button from "../00-atoms/button";
 import useAppContext from "../../context/appcontext/useappcontext";
 import { AppReducerActionTypes } from "../../context/appcontext/appstatereducers";
 import PAGES from "../../constants/pages";
-import MENU_ITEMS from "../../constants/menu-items";
 import DialogLayout from "../03-templates/dialog-layout";
+import ACTIVE_MENUS from "../../constants/active-menus";
 
 const LoadDialog = ({ displayDialog, closeDialog }) => {
   const context = useAppContext();
@@ -33,7 +33,7 @@ const LoadDialog = ({ displayDialog, closeDialog }) => {
           });
           context.appStateDispatch({
             type: AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM,
-            payload: [MENU_ITEMS.EDIT, MENU_ITEMS.DATA],
+            payload: ACTIVE_MENUS.LOADED,
           });
         }
       };

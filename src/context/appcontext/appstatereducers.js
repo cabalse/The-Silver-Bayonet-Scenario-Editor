@@ -24,13 +24,19 @@ const appStateReducer = (state, action) => {
         ...state,
         displayLoadDialog: payload,
       };
+
     case AppReducerActionTypes.CHANGE_ADD_ITEM_DIALOG_STATE:
       return {
         ...state,
         displayAddItemDialog: payload,
       };
+
     case AppReducerActionTypes.SET_ACTIVE_MENU_ITEM:
-      return { ...state };
+      return {
+        ...state,
+        activeMenuItems: payload,
+      };
+
     case AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM:
       console.log("Reducer ADD_ACTIVE_MENU_ITEM", payload);
       if (Array.isArray(payload))
@@ -40,6 +46,7 @@ const appStateReducer = (state, action) => {
         ...state,
         activeMenuItems: activeMenuItems,
       };
+
     case AppReducerActionTypes.REMOVE_ACTIVE_MENU_ITEM:
       if (Array.isArray(payload))
         payload.forEach((item) => removeFromArray(activeMenuItems, item));
@@ -48,11 +55,13 @@ const appStateReducer = (state, action) => {
         ...state,
         activeMenuItems: activeMenuItems,
       };
+
     case AppReducerActionTypes.SET_SCENARIO_DATA:
       return {
         ...state,
         scenarioData: payload,
       };
+
     case AppReducerActionTypes.UPDATE_SCENARIO_TERRAIN_PIECE:
       terrain = [...state.scenarioData.terrain];
       terrain_id = terrain.findIndex((tp) => tp.id === payload.id);
@@ -68,11 +77,13 @@ const appStateReducer = (state, action) => {
           terrain: terrain,
         },
       };
+
     case AppReducerActionTypes.SWITCH_PAGE:
       return {
         ...state,
         page: payload,
       };
+
     default:
       console.log("Unknown action type: ", type);
       return state;

@@ -8,6 +8,13 @@ const Button = ({ onClick, type, disabled = false, children }) => {
   const [classNames, setClassNames] = useState(baseClassNames);
 
   useEffect(() => {
+    if (disabled) {
+      setClassNames(
+        `${baseClassNames} bg-slate-200 text-gray-300 hover:bg-gray-200`
+      );
+      return;
+    }
+
     switch (type) {
       case BUTTON_TYPES.PRIMARY:
         setClassNames(
@@ -19,20 +26,18 @@ const Button = ({ onClick, type, disabled = false, children }) => {
           `${baseClassNames} bg-red-500 text-white hover:bg-red-700`
         );
         break;
+      case BUTTON_TYPES.HIGHLIGHTED:
+        setClassNames(
+          `${baseClassNames} bg-blue-400 text-white hover:bg-blue-600`
+        );
+        break;
       default:
         setClassNames(
           `${baseClassNames} bg-white text-gray-900 hover:bg-gray-100`
         );
         break;
     }
-  }, [type]);
-
-  useEffect(() => {
-    if (disabled)
-      setClassNames(
-        `${baseClassNames} bg-slate-200 text-gray-300 hover:bg-gray-200`
-      );
-  }, [disabled]);
+  }, [type, disabled]);
 
   return (
     <button

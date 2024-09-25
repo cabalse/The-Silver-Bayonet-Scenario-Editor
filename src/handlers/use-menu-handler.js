@@ -1,3 +1,4 @@
+import ACTIVE_MENUS from "../constants/active-menus";
 import MENU_ITEMS from "../constants/menu-items";
 import PAGES from "../constants/pages";
 import { AppReducerActionTypes } from "../context/appcontext/appstatereducers";
@@ -20,6 +21,11 @@ const useMenuHandler = () => {
           type: AppReducerActionTypes.SWITCH_PAGE,
           payload: PAGES.DATA,
         });
+        context.appStateDispatch({
+          type: AppReducerActionTypes.SET_ACTIVE_MENU_ITEM,
+          payload: ACTIVE_MENUS.DATA,
+        });
+
         break;
 
       case MENU_ITEMS.SAVE:
@@ -32,8 +38,8 @@ const useMenuHandler = () => {
           payload: PAGES.EDIT,
         });
         context.appStateDispatch({
-          type: AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM,
-          payload: MENU_ITEMS.ADD,
+          type: AppReducerActionTypes.SET_ACTIVE_MENU_ITEM,
+          payload: ACTIVE_MENUS.EDIT,
         });
         break;
 
