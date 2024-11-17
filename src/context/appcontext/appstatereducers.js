@@ -1,5 +1,9 @@
-import addToArray from "../../utilities/add-to-array";
-import removeFromArray from "../../utilities/remove-from-array";
+import addActiveMenuItem from "./reducer/add-active-menu-item";
+import addTerrainPiece from "./reducer/add-terrain-piece";
+import removeActiveMenuItem from "./reducer/remove-active-menu-item";
+import setActiveMenuItems from "./reducer/set-active-menu-items";
+import setSelectedPieceOnTop from "./reducer/set-selected-piece-on-top";
+import updateScenarioTerrainPiece from "./reducer/update-scenario-terrain-piece";
 
 const AppReducerActionTypes = Object.freeze({
   CHANGE_LOAD_DIALOG_STATE: "CHANGE_LOAD_DIALOG_STATE",
@@ -9,16 +13,25 @@ const AppReducerActionTypes = Object.freeze({
   SET_ACTIVE_MENU_ITEM: "SET_ACTIVE_MENU_ITEM",
   SET_SCENARIO_DATA: "SET_SCENARIO_DATA",
   UPDATE_SCENARIO_TERRAIN_PIECE: "UPDATE_SCENARIO_TERRAIN_PIECE",
-  SWITCH_PAGE: "SWITCH_PAGE",
+  SWITCH_PAGE_TO: "SWITCH_PAGE_TO",
+  SCENARIO_DATA_CHANGE: "SCENARIO_DATA_CHANGE",
+  ADD_TERRAIN_PIECE: "ADD_TERRAIN_PIECE",
+  REGISTER_MAP: "REGISTER_MAP",
+  SELECT_TERRAIN_PIECE: "SELECT_TERRAIN_PIECE",
+  TERRAIN_PIECE_DESELECTED: "TERRAIN_PIECE_DESELECTED",
+  SET_SELECTED_PIECE_ON_TOP: "SET_SELECTED_PIECE_ON_TOP",
 });
 
 const appStateReducer = (state, action) => {
   const { type, payload } = action;
-  const activeMenuItems = [...state.activeMenuItems];
-
-  let terrain, terrain_id;
 
   switch (type) {
+    case AppReducerActionTypes.REGISTER_MAP:
+      return {
+        ...state,
+        mapRef: payload,
+      };
+
     case AppReducerActionTypes.CHANGE_LOAD_DIALOG_STATE:
       return {
         ...state,
@@ -32,29 +45,13 @@ const appStateReducer = (state, action) => {
       };
 
     case AppReducerActionTypes.SET_ACTIVE_MENU_ITEM:
-      return {
-        ...state,
-        activeMenuItems: payload,
-      };
+      return setActiveMenuItems(state, payload);
 
     case AppReducerActionTypes.ADD_ACTIVE_MENU_ITEM:
-      console.log("Reducer ADD_ACTIVE_MENU_ITEM", payload);
-      if (Array.isArray(payload))
-        payload.forEach((item) => addToArray(activeMenuItems, item));
-      else addToArray(activeMenuItems, payload);
-      return {
-        ...state,
-        activeMenuItems: activeMenuItems,
-      };
+      return addActiveMenuItem(state, payload);
 
     case AppReducerActionTypes.REMOVE_ACTIVE_MENU_ITEM:
-      if (Array.isArray(payload))
-        payload.forEach((item) => removeFromArray(activeMenuItems, item));
-      else removeFromArray(activeMenuItems, payload);
-      return {
-        ...state,
-        activeMenuItems: activeMenuItems,
-      };
+      return removeActiveMenuItem(state, payload);
 
     case AppReducerActionTypes.SET_SCENARIO_DATA:
       return {
@@ -62,27 +59,39 @@ const appStateReducer = (state, action) => {
         scenarioData: payload,
       };
 
-    case AppReducerActionTypes.UPDATE_SCENARIO_TERRAIN_PIECE:
-      terrain = [...state.scenarioData.terrain];
-      terrain_id = terrain.findIndex((tp) => tp.id === payload.id);
-
-      terrain[terrain_id].position.x = Math.floor(payload.x);
-      terrain[terrain_id].position.y = Math.floor(payload.y);
-      if (payload.rot) terrain[terrain_id].rotation = Math.floor(payload.rot);
-
+    case AppReducerActionTypes.SCENARIO_DATA_CHANGE:
       return {
         ...state,
-        scenarioData: {
-          ...state.scenarioData,
-          terrain: terrain,
-        },
+        scenarioChanged: true,
       };
 
-    case AppReducerActionTypes.SWITCH_PAGE:
+    case AppReducerActionTypes.UPDATE_SCENARIO_TERRAIN_PIECE:
+      return updateScenarioTerrainPiece(state, payload);
+
+    case AppReducerActionTypes.SWITCH_PAGE_TO:
       return {
         ...state,
         page: payload,
       };
+
+    case AppReducerActionTypes.ADD_TERRAIN_PIECE:
+      return addTerrainPiece(state, payload);
+
+    case AppReducerActionTypes.TERRAIN_PIECE_DESELECTED:
+      return {
+        ...state,
+        selectedTerrainPiece: null,
+      };
+
+    case AppReducerActionTypes.SELECT_TERRAIN_PIECE:
+      console.log("Selecting terrain piece: ", payload);
+      return {
+        ...state,
+        selectedTerrainPiece: payload,
+      };
+
+    case AppReducerActionTypes.SET_SELECTED_PIECE_ON_TOP:
+      return setSelectedPieceOnTop(state);
 
     default:
       console.log("Unknown action type: ", type);

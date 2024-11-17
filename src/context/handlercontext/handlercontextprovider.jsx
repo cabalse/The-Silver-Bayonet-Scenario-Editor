@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import useMenuHandler from "../../handlers/use-menu-handler";
+import useMenuHandler from "../../hooks/use-menu-handler";
 
 const initialContextValue = {
   menuHandler: () => {},

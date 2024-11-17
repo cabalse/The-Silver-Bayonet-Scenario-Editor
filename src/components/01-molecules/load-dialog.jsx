@@ -28,7 +28,7 @@ const LoadDialog = ({ displayDialog, closeDialog }) => {
             payload: data,
           });
           context.appStateDispatch({
-            type: AppReducerActionTypes.SWITCH_PAGE,
+            type: AppReducerActionTypes.SWITCH_PAGE_TO,
             payload: PAGES.JSON_VIEWER,
           });
           context.appStateDispatch({

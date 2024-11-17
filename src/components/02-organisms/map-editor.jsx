@@ -1,9 +1,17 @@
-import { useRef, useState } from "react";
-import { Layer, Stage } from "react-konva";
+import { useEffect, useRef, useState } from "react";
+import { Layer, Stage, Image } from "react-konva";
+import useImage from "use-image";
 
 import TerrainPieces from "./terrain-pieces";
 import useAppContext from "../../context/appcontext/useappcontext";
 import { AppReducerActionTypes } from "../../context/appcontext/appstatereducers";
+
+import map from "./../../assets/tsb-background.jpg";
+
+const Map = () => {
+  const [image] = useImage(map);
+  return <Image image={image} width="1100" height="800" />;
+};
 
 const MapEditor = () => {
   const context = useAppContext();
@@ -11,8 +19,19 @@ const MapEditor = () => {
 
   const [selected, setSelected] = useState(0);
 
+  useEffect(() => {
+    context.appStateDispatch({
+      type: AppReducerActionTypes.REGISTER_MAP,
+      payload: stageRef,
+    });
+  }, [stageRef]);
+
   const onSelect = (id) => {
     setSelected(id);
+    context.appStateDispatch({
+      type: AppReducerActionTypes.SELECT_TERRAIN_PIECE,
+      payload: id,
+    });
   };
 
   const onMove = (id, x, y) => {
@@ -33,6 +52,9 @@ const MapEditor = () => {
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty) {
       setSelected(0);
+      context.appStateDispatch({
+        type: AppReducerActionTypes.TERRAIN_PIECE_DESELECTED,
+      });
     }
   };
 
@@ -45,6 +67,7 @@ const MapEditor = () => {
       draggable
     >
       <Layer>
+        <Map />
         <TerrainPieces
           data={context.appState.scenarioData.terrain}
           selected={selected}

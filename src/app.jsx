@@ -13,6 +13,7 @@ function App() {
   const context = useAppContext();
   let page = null;
 
+  // Determine which page content to display
   switch (context.appState.page) {
     case PAGES.INDEX:
       page = <IndexPage />;

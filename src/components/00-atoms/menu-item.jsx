@@ -4,7 +4,7 @@ import Button from "./button";
 const MenuItem = ({
   onClick,
   highlighted = false,
-  disabled = false,
+  enabled = true,
   children,
 }) => {
   const buttonType = highlighted
@@ -12,7 +12,7 @@ const MenuItem = ({
     : BUTTON_TYPES.PRIMARY;
 
   return (
-    <Button type={buttonType} onClick={onClick} disabled={disabled}>
+    <Button type={buttonType} onClick={onClick} enabled={enabled}>
       {children}
     </Button>
   );
