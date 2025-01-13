@@ -1,14 +1,18 @@
-// import { useState } from "react";
+import fileDownload from "react-file-download";
 import BUTTON_TYPES from "../../constants/button-types";
 import Button from "../00-atoms/button";
-// import useAppContext from "../../context/appcontext/useappcontext";
-// import { AppReducerActionTypes } from "../../context/appcontext/appstatereducers";
 import DialogLayout from "../03-templates/dialog-layout";
+import useAppContext from "../../context/appcontext/useappcontext";
 
 const SaveDialog = ({ displayDialog, closeDialog }) => {
-  // const context = useAppContext();
+  const context = useAppContext();
 
   const handleSave = async () => {
+    console.log("Saving scenario data: ", context);
+    fileDownload(
+      JSON.stringify(context.appState.scenarioData),
+      "scenario.json"
+    );
     closeDialog();
   };
 

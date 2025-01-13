@@ -30,7 +30,10 @@ const useMenuHandler = () => {
         break;
 
       case MENU_ITEMS.SAVE:
-        console.log("Save menu item selected");
+        context.appStateDispatch({
+          type: AppReducerActionTypes.CHANGE_SAVE_DIALOG_STATE,
+          payload: true,
+        });
         break;
 
       case MENU_ITEMS.EXPORT:

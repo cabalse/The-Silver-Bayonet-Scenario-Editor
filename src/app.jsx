@@ -8,6 +8,7 @@ import MapEditPage from "./components/04-pages/map-edit-page";
 import AddItemDialog from "./components/01-molecules/add-item-dialog";
 
 import "./app.css";
+import SaveDialog from "./components/01-molecules/save-dialog";
 
 function App() {
   const context = useAppContext();
@@ -36,6 +37,15 @@ function App() {
         closeDialog={() =>
           context.appStateDispatch({
             type: AppReducerActionTypes.CHANGE_LOAD_DIALOG_STATE,
+            payload: false,
+          })
+        }
+      />
+      <SaveDialog
+        displayDialog={context.appState.displaySaveDialog}
+        closeDialog={() =>
+          context.appStateDispatch({
+            type: AppReducerActionTypes.CHANGE_SAVE_DIALOG_STATE,
             payload: false,
           })
         }

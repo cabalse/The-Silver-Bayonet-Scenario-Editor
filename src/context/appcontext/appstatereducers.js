@@ -8,6 +8,7 @@ import updateScenarioTerrainPiece from "./reducer/update-scenario-terrain-piece"
 const AppReducerActionTypes = Object.freeze({
   CHANGE_LOAD_DIALOG_STATE: "CHANGE_LOAD_DIALOG_STATE",
   CHANGE_ADD_ITEM_DIALOG_STATE: "CHANGE_ADD_ITEM_DIALOG_STATE",
+  CHANGE_SAVE_DIALOG_STATE: "CHANGE_SAVE_DIALOG_STATE",
   REMOVE_ACTIVE_MENU_ITEM: "REMOVE_ACTIVE_MENU_ITEM",
   ADD_ACTIVE_MENU_ITEM: "ADD_ACTIVE_MENU_ITEM",
   SET_ACTIVE_MENU_ITEM: "SET_ACTIVE_MENU_ITEM",
@@ -36,6 +37,12 @@ const appStateReducer = (state, action) => {
       return {
         ...state,
         displayLoadDialog: payload,
+      };
+
+    case AppReducerActionTypes.CHANGE_SAVE_DIALOG_STATE:
+      return {
+        ...state,
+        displaySaveDialog: payload,
       };
 
     case AppReducerActionTypes.CHANGE_ADD_ITEM_DIALOG_STATE:
